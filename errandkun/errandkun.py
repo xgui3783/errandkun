@@ -1,7 +1,7 @@
 import sys
 from mkdocs.plugins import BasePlugin
 from mkdocs.config import config_options
-from . import GithubArtefactSource
+from .external_resources.github import GithubArtefactSource
 import os
 
 class ErrandKunPlugin(BasePlugin):
@@ -14,7 +14,7 @@ class ErrandKunPlugin(BasePlugin):
 
   def on_pre_build(self, config):
     
-    extract_path = self.config('extract_path')
+    extract_path = self.config['extract_path']
 
     for external_resource in self.config['external_resources']:
       if external_resource['type'] is None:
