@@ -1,5 +1,5 @@
 import requests
-from os import path
+from os import path, makedirs
 import uuid
 
 class BaseExternalSource():
@@ -14,6 +14,7 @@ class BaseExternalSource():
   def download(self, url, headers=None, filename=None):
     if url is None:
       raise MissingParameter('url is required for download function')
+    makedirs(self.extract_path, exist_ok=True)
     r = requests.get(url, headers=headers)
     _filename = filename if filename is not None else uuid.uuid4()
     with open(path.join(self.extract_path, _filename), 'wb') as f:
